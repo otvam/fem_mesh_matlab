@@ -53,7 +53,7 @@ data_tmp = model.mpheval(expr,'Dataset', dataset, 'Complexout','on', 'Selection'
 % assign the geometry
 geom.type = type;
 geom.n = size(data_tmp.p,2);
-geom.tri = (data_tmp.t+1).';
+geom.tri = double(data_tmp.t+1).';
 geom.x = data_tmp.p(1,:);
 geom.y = data_tmp.p(2,:);
 switch type
