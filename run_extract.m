@@ -1,6 +1,7 @@
 function run_extract()
 
 addpath(genpath('src'))
+close('all')
 
 % load
 data_tmp = load('data.mat');
@@ -30,5 +31,20 @@ data.geom = extract_geom(data.geom);
 data.Ex = extract_data(data.geom, data.Ex, @mean);
 data.Ey = extract_data(data.geom, data.Ey, @mean);
 data.E = extract_data(data.geom, data.E, @mean);
+
+figure()
+hold('on')
+
+plot_data.face_color = [0.8 0.8 1.0];
+plot_data.edge_color = 'k';
+plot_data.edge_alpha = 1.0;
+plot_data.face_alpha = 0.5;
+
+plot_geom(data.geom, plot_data);
+
+axis('tight')
+axis('off')
+axis('equal')
+view([+40 -120])
 
 end
