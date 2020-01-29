@@ -1,4 +1,6 @@
-function v_int = interp_dom(geom, data, pts)
+function v_int = interp_data(geom, data, pts)
+
+assert(size(data,1)==geom.n, 'invalid data')
 
 switch geom.type
     case 'surface_2d'
