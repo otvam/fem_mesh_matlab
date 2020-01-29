@@ -1,4 +1,4 @@
-function run_simple()
+function run_fem()
 
 addpath(genpath('fem_utils'))
 
