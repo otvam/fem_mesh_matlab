@@ -65,19 +65,19 @@ tri = geom.tri;
 AB = [x(tri(:,2))-x(tri(:,1)) ; y(tri(:,2))-y(tri(:,1)) ; z(tri(:,2))-z(tri(:,1))];
 
 % get the direction vector
-dx = AB(1,:);
-dy = AB(2,:);
-dz = AB(3,:);
+d_x = AB(1,:);
+d_y = AB(2,:);
+d_z = AB(3,:);
 
 % get the length
-length_tri = sqrt(dx.^2+dy.^2+dz.^2);
+length_tri = sqrt(d_x.^2+d_y.^2+d_z.^2);
 
 % assign
 geom.length_tri = length_tri;
 geom.length = sum(length_tri);
-geom.dx = dx./length_tri;
-geom.dy = dy./length_tri;
-geom.dz = dz./length_tri;
+geom.d_x = d_x;
+geom.d_y = d_y;
+geom.d_z = d_z;
 
 end
 
@@ -92,17 +92,17 @@ tri = geom.tri;
 AB = [x(tri(:,2))-x(tri(:,1)) ; y(tri(:,2))-y(tri(:,1))];
 
 % get the direction vector
-dx = AB(1,:);
-dy = AB(2,:);
+d_x = AB(1,:);
+d_y = AB(2,:);
 
 % get the length
-length_tri = sqrt(dx.^2+dy.^2);
+length_tri = sqrt(d_x.^2+d_y.^2);
 
 % assign
 geom.length_tri = length_tri;
 geom.length = sum(length_tri);
-geom.dx = dx./length_tri;
-geom.dy = dy./length_tri;
+geom.d_x = d_x;
+geom.d_y = d_y;
 
 end
 
@@ -145,19 +145,19 @@ AC = [x(tri(:,3))-x(tri(:,1)) ; y(tri(:,3))-y(tri(:,1)) ; z(tri(:,3))-z(tri(:,1)
 cross = [AB(2,:).*AC(3,:)-AB(3,:).*AC(2,:) ; AB(3,:).*AC(1,:)-AB(1,:).*AC(3,:) ; AB(1,:).*AC(2,:)-AB(2,:).*AC(1,:)];
 
 % assign the normal vector
-nx = cross(1,:);
-ny = cross(2,:);
-nz = cross(3,:);
+n_x = cross(1,:);
+n_y = cross(2,:);
+n_z = cross(3,:);
 
 % get the area
-area_tri = sqrt(nx.^2+ny.^2+nz.^2)./2.0;
+area_tri = sqrt(n_x.^2+n_y.^2+n_z.^2)./2.0;
 
 % assign
 geom.area_tri = area_tri;
 geom.area = sum(area_tri);
-geom.nx = nx./area_tri;
-geom.ny = ny./area_tri;
-geom.nz = nz./area_tri;
+geom.n_x = n_x;
+geom.n_y = n_y;
+geom.n_z = n_z;
 
 end
 
