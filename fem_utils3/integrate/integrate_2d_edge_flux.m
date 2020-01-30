@@ -10,8 +10,8 @@ for i=1:length(geom.line)
     vx = data_x(geom.line{i}.idx);
     vy = data_y(geom.line{i}.idx);
     
-    vx = (vx(1:end-1, :)+vx(2:end, :))./2.0;
-    vy = (vy(1:end-1, :)+vy(2:end, :))./2.0;
+    vx = (vx(1:end-1, :)+vx(2:end, :))./2;
+    vy = (vy(1:end-1, :)+vy(2:end, :))./2;
         
     v_int{i} = abs(dy*vx-dx*vy);
 end

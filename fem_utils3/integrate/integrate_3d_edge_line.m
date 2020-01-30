@@ -12,9 +12,9 @@ for i=1:length(geom.line)
     vy = data_y(geom.line{i}.idx);
     vz = data_z(geom.line{i}.idx);
     
-    vx = (vx(1:end-1, :)+vx(2:end, :))./2.0;
-    vy = (vy(1:end-1, :)+vy(2:end, :))./2.0;
-    vz = (vz(1:end-1, :)+vz(2:end, :))./2.0;
+    vx = (vx(1:end-1, :)+vx(2:end, :))./2;
+    vy = (vy(1:end-1, :)+vy(2:end, :))./2;
+    vz = (vz(1:end-1, :)+vz(2:end, :))./2;
         
     v_int{i} = abs(dx*vx+dy*vy+dz*vz);
 end

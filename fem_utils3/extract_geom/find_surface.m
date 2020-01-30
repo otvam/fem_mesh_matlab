@@ -18,9 +18,9 @@ AC = [x(tri(:,3))-x(tri(:,1)) ; y(tri(:,3))-y(tri(:,1)) ; z(tri(:,3))-z(tri(:,1)
 
 cross = [AB(2,:).*AC(3,:)-AB(3,:).*AC(2,:) ; AB(3,:).*AC(1,:)-AB(1,:).*AC(3,:) ; AB(1,:).*AC(2,:)-AB(2,:).*AC(1,:)];
 
-nx = cross(1,:)./2.0;
-ny = cross(2,:)./2.0;
-nz = cross(3,:)./2.0;
+nx = cross(1,:)./2;
+ny = cross(2,:)./2;
+nz = cross(3,:)./2;
 
 area_tri = sqrt(nx.^2+ny.^2+nz.^2);
 area = sum(area_tri);

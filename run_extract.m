@@ -9,19 +9,24 @@ data_2d = data_tmp.data_2d;
 data_3d = data_tmp.data_3d;
 
 % plot_param
+plot_param.arrow_scale = 1.0;
+plot_param.arrow_color = 'r';
+plot_param.marker = 'x';
 plot_param.face_color = [0.8 0.8 1.0];
 plot_param.edge_color = 'k';
 plot_param.edge_alpha = 1.0;
 plot_param.face_alpha = 0.5;
 
 % extract 2d data
-data_2d.edge = parse_data_2d(data_2d.edge, plot_param);
-data_2d.surface = parse_data_2d(data_2d.surface, plot_param);
+% data_2d.edge = parse_data_2d(data_2d.edge, plot_param);
+% data_2d.surface = parse_data_2d(data_2d.surface, plot_param);
 
 % extract 3d data
+% data_3d.edge = parse_data_3d(data_3d.edge, plot_param);
 data_3d.surface = parse_data_3d(data_3d.surface, plot_param);
-data_3d.edge = parse_data_3d(data_3d.edge, plot_param);
-data_3d.volume = parse_data_3d(data_3d.volume, plot_param);
+% data_3d.volume = parse_data_3d(data_3d.volume, plot_param);
+
+dfdfdf
 
 % interpolation 2d
 x = linspace(-0.15, +0.15, 25);

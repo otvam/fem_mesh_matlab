@@ -20,6 +20,6 @@ v1 = data(geom.tri(:,1), :);
 v2 = data(geom.tri(:,2), :);
 v3 = data(geom.tri(:,3), :);
 
-v123 = (v1+v2+v3)./3.0;
+v123 = (v1+v2+v3)./3;
 
 end

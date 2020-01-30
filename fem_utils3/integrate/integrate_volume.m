@@ -6,7 +6,7 @@ v3 = data(geom.tri(:,3), :);
 v4 = data(geom.tri(:,4), :);
 
 volume_tri = geom.volume_tri;
-v123 = (v1+v2+v3+v4)./4.0;
+v123 = (v1+v2+v3+v4)./4;
 
 v_int = volume_tri*v123;
 
