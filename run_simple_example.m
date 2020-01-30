@@ -45,15 +45,15 @@ integral_3d(data_3d)
 
 end
 
-function data = parse_data_2d(data, plot_param)
+function data = parse_data_2d(data_fem, plot_param)
 
 % geom
-data.geom = extract_geom(data.geom, true);
+data.geom = extract_geom(data_fem.geom_fem, true);
 
 % data
-data.E_x = extract_data(data.geom, data.E_x, @mean);
-data.E_y = extract_data(data.geom, data.E_y, @mean);
-data.E = extract_data(data.geom, data.E, @mean);
+data.E_x = extract_data(data.geom, data_fem.E_x, @mean);
+data.E_y = extract_data(data.geom, data_fem.E_y, @mean);
+data.E = extract_data(data.geom, data_fem.E, @mean);
 
 % geom
 figure()
@@ -77,16 +77,16 @@ title('Electric Field [V/m]')
 
 end
 
-function data = parse_data_3d(data, plot_param)
+function data = parse_data_3d(data_fem, plot_param)
 
 % geom
-data.geom = extract_geom(data.geom, true);
+data.geom = extract_geom(data_fem.geom_fem, true);
 
 % data
-data.E_x = extract_data(data.geom, data.E_x, @mean);
-data.E_y = extract_data(data.geom, data.E_y, @mean);
-data.E_z = extract_data(data.geom, data.E_z, @mean);
-data.E = extract_data(data.geom, data.E, @mean);
+data.E_x = extract_data(data.geom, data_fem.E_x, @mean);
+data.E_y = extract_data(data.geom, data_fem.E_y, @mean);
+data.E_z = extract_data(data.geom, data_fem.E_z, @mean);
+data.E = extract_data(data.geom, data_fem.E, @mean);
 
 % geom
 figure()

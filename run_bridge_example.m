@@ -35,15 +35,13 @@ disp = extract_data(geom, data.disp, @mean);
 
 end
 
-function geom = deform_geometry(data, scale)
+function geom = deform_geometry(data_fem, scale)
 
-geom = data.geom;
+geom_fem = data_fem.geom_fem;
 
-geom.x = geom.x+scale.*data.disp_x;
-geom.y = geom.y+scale.*data.disp_y;
-geom.z = geom.z+scale.*data.disp_z;
+geom_fem.pts = geom_fem.pts+scale.*data_fem.disp_mat;
 
-geom = extract_geom(geom, false);
+geom = extract_geom(geom_fem, false);
 
 end
 

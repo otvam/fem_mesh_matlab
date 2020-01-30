@@ -24,10 +24,12 @@ function data = extract_2d(model, dataset, sel, type)
 
 % geom
 expr = {'es_2d.Ex', 'es_2d.Ey', 'es_2d.normE'};
-[data.geom, value] = extract_comsol(model, dataset, sel, type, expr);
-data.E_x = value{1};
-data.E_y = value{2};
-data.E = value{3};
+[geom_fem, value_fem] = extract_comsol(model, dataset, sel, type, expr);
+
+data.geom_fem = geom_fem;
+data.E_x = value_fem{1};
+data.E_y = value_fem{2};
+data.E = value_fem{3};
 
 end
 
@@ -35,10 +37,12 @@ function data = extract_3d(model, dataset, sel, type)
 
 % geom
 expr = {'es_3d.Ex', 'es_3d.Ey', 'es_3d.Ez', 'es_3d.normE'};
-[data.geom, value] = extract_comsol(model, dataset, sel, type, expr);
-data.E_x = value{1};
-data.E_y = value{2};
-data.E_z = value{3};
-data.E = value{4};
+[geom_fem, value_fem] = extract_comsol(model, dataset, sel, type, expr);
+
+data.geom_fem = geom_fem;
+data.E_x = value_fem{1};
+data.E_y = value_fem{2};
+data.E_z = value_fem{3};
+data.E = value_fem{4};
 
 end

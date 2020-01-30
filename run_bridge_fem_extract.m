@@ -19,10 +19,10 @@ function data = extract_3d(model, dataset, sel, type)
 
 % geom
 expr = {'u', 'v', 'w', 'solid.disp'};
-[data.geom, value] = extract_comsol(model, dataset, sel, type, expr);
-data.disp_x = value{1};
-data.disp_y = value{2};
-data.disp_z = value{3};
-data.disp = value{4};
+[geom_fem, value_fem] = extract_comsol(model, dataset, sel, type, expr);
+
+data.geom_fem = geom_fem;
+data.disp_mat = [value_fem{1:3}];
+data.disp = value_fem{4};
 
 end
