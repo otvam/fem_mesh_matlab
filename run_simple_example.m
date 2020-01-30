@@ -48,7 +48,7 @@ end
 function data = parse_data_2d(data, plot_param)
 
 % geom
-data.geom = extract_geom(data.geom);
+data.geom = extract_geom(data.geom, true);
 
 % data
 data.E_x = extract_data(data.geom, data.E_x, @mean);
@@ -80,7 +80,7 @@ end
 function data = parse_data_3d(data, plot_param)
 
 % geom
-data.geom = extract_geom(data.geom);
+data.geom = extract_geom(data.geom, true);
 
 % data
 data.E_x = extract_data(data.geom, data.E_x, @mean);

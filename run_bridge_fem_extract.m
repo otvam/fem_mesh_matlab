@@ -1,45 +1,28 @@
-function extract_data()
+function run_bridge_fem_extract()
 
-addpath(genpath('fem_utils'))
+close('all')
+addpath('fem_mesh_utils')
 
 % load
-model = mphload('test.mph');
+model = mphload('model_bridge/bridge.mph');
 
 % data
-t = 43.5;
-sel_core = 'sel3';
-sel_winding = 'sel1';
-sel_ntc = 'uni3';
-
-% temperature
-core_temperature = extract_dom_value(model, 'dset4', sel_core, 'T-T_ambient', t);
-winding_temperature = extract_dom_value(model, 'dset4', sel_winding, 'T-T_ambient', t);
-ntc_temperature = extract_dom_value(model, 'dset4', sel_ntc, 'T-T_ambient', t);
-
-% losses
-core_losses = extract_dom_value(model, 'dset4', sel_core, 'p_core_mf', t);
-winding_losses = extract_dom_value(model, 'dset4', sel_winding, 'p_winding_mf', t);
-ntc_losses = extract_dom_value(model, 'dset4', sel_ntc, '0', t);
+data_edge = extract_3d(model, 'dset1', 'adj2', 'edge_3d');
+data_surface = extract_3d(model, 'dset1', 'adj1', 'surface_3d');
 
 % save
-save('data.mat', 'core_temperature', 'winding_temperature', 'ntc_temperature', 'core_losses', 'winding_losses', 'ntc_losses')
+save('model_bridge/bridge.mat', 'data_edge', 'data_surface')
 
 end
 
-function data = extract_dom_value(model, dataset, sel, expr, t)
+function data = extract_3d(model, dataset, sel, type)
 
-data_tmp = model.mpheval(expr,'Dataset', dataset, 'Complexout','on', 'Selection', sel, 't', t);
-
-geom_raw.n = size(data_tmp.p,2);
-geom_raw.x = data_tmp.p(1,:);
-geom_raw.y = data_tmp.p(2,:);
-geom_raw.z = data_tmp.p(3,:);
-geom_raw.tri = (data_tmp.t+1).';
-geom = extract_geom_3d_surface(geom_raw);
-
-value = data_tmp.d1.';
-
-data.geom = geom;
-data.value = value;
+% geom
+expr = {'u', 'v', 'w', 'solid.disp'};
+[data.geom, value] = extract_comsol(model, dataset, sel, type, expr);
+data.disp_x = value{1};
+data.disp_y = value{2};
+data.disp_z = value{3};
+data.disp = value{4};
 
 end

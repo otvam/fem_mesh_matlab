@@ -1,6 +1,6 @@
-function geom = extract_geom(geom)
+function geom = extract_geom(geom, remove_duplicates)
 
-geom = find_duplicate_pts(geom);
+geom = remove_duplicate_pts(geom, remove_duplicates);
 
 switch geom.type
     case 'edge_2d'
@@ -19,26 +19,32 @@ end
 
 end
 
-function geom_new = find_duplicate_pts(geom)
+function geom_new = remove_duplicate_pts(geom, remove_duplicates)
 
-switch geom.type
-    case {'edge_2d', 'surface_2d'}
-        pts = [geom.x ; geom.y];
-    case {'edge_3d', 'surface_3d', 'volume_3d'}
-        pts = [geom.x ; geom.y ; geom.z];
-    otherwise
-        error('invalid type')
+if remove_duplicates==true
+    switch geom.type
+        case {'edge_2d', 'surface_2d'}
+            pts = [geom.x ; geom.y];
+        case {'edge_3d', 'surface_3d', 'volume_3d'}
+            pts = [geom.x ; geom.y ; geom.z];
+        otherwise
+            error('invalid type')
+    end
+    
+    [pts_unique, idx, idx_rev] = unique(pts.','rows');
+    tri = changem(geom.tri, idx_rev, 1:geom.n);
+    tri = unique(tri,'rows');
+else
+    idx = 1:geom.n;
+    idx_rev = 1:geom.n;
+    tri = geom.tri;
 end
-
-[pts_unique, idx, idx_rev] = unique(pts.','rows');
-tri_unique = changem(geom.tri, idx_rev, 1:geom.n);
-tri_unique = unique(tri_unique,'rows');
 
 geom_new.type = geom.type;
 geom_new.n = length(idx);
 geom_new.idx = idx;
 geom_new.idx_rev = idx_rev;
-geom_new.tri = tri_unique;
+geom_new.tri = tri;
 switch geom.type
     case {'edge_2d', 'surface_2d'}
         geom_new.x = geom.x(idx);
