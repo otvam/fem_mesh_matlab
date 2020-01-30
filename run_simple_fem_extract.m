@@ -1,4 +1,4 @@
-function run_fem()
+function run_simple_fem_extract()
 
 close('all')
 addpath('fem_utils')
@@ -16,7 +16,7 @@ data_3d.edge = extract_3d(model, 'dset2', 'uni2', 'edge_3d');
 data_3d.volume = extract_3d(model, 'dset2', 'sel6', 'volume_3d');
 
 % save
-save('data.mat', 'data_2d', 'data_3d')
+save('simple.mat', 'data_2d', 'data_3d')
 
 end
 
