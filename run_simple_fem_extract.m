@@ -1,10 +1,10 @@
 function run_simple_fem_extract()
 
 close('all')
-addpath('fem_utils')
+addpath('fem_mesh_utils')
 
 % load
-model = mphload('simple.mph');
+model = mphload('model_simple/simple.mph');
 
 % extract 2d data
 data_2d.edge = extract_2d(model, 'dset1', 'uni1', 'edge_2d');
@@ -16,7 +16,7 @@ data_3d.edge = extract_3d(model, 'dset2', 'uni2', 'edge_3d');
 data_3d.volume = extract_3d(model, 'dset2', 'sel6', 'volume_3d');
 
 % save
-save('simple.mat', 'data_2d', 'data_3d')
+save('model_simple/simple.mat', 'data_2d', 'data_3d')
 
 end
 

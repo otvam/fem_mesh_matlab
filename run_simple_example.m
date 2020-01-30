@@ -1,10 +1,10 @@
 function run_simple_example()
 
 close('all')
-addpath('fem_utils')
+addpath('fem_mesh_utils')
 
 % load
-data_tmp = load('simple.mat');
+data_tmp = load('model_simple/simple.mat');
 data_2d = data_tmp.data_2d;
 data_3d = data_tmp.data_3d;
 
