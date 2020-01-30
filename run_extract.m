@@ -35,33 +35,10 @@ z = linspace(-0.15, +0.15, 25);
 interp_3d(data_3d.volume, x, y, z);
 
 % integral 2d
-int = struct('type', 'scalar', 'data', data_2d.surface.E);
-v = integrate_data(data_2d.surface.geom, int);
-
-int = struct('type', 'scalar', 'data', data_2d.edge.E);
-v = integrate_data(data_2d.edge.geom, int);
-
-int = struct('type', 'tangential', 'data_x', data_2d.edge.E_x, 'data_y', data_2d.edge.E_y);
-v = integrate_data(data_2d.edge.geom, int);
-
-int = struct('type', 'normal', 'data_x', data_2d.edge.E_x, 'data_y', data_2d.edge.E_y);
-v = integrate_data(data_2d.edge.geom, int);
+integral_2d(data_2d)
 
 % integral 3d
-int = struct('type', 'scalar', 'data', data_3d.surface.E);
-v = integrate_data(data_3d.surface.geom, int);
-
-int = struct('type', 'normal', 'data_x', data_3d.surface.E_x, 'data_y', data_3d.surface.E_y, 'data_z', data_3d.surface.E_z);
-v = integrate_data(data_3d.surface.geom, int);
-
-int = struct('type', 'scalar', 'data', data_3d.volume.E);
-v = integrate_data(data_3d.volume.geom, int);
-
-int = struct('type', 'scalar', 'data', data_3d.edge.E);
-v = integrate_data(data_3d.edge.geom, int);
-
-int = struct('type', 'tangential', 'data_x', data_3d.edge.E_x, 'data_y', data_3d.edge.E_y, 'data_z', data_3d.edge.E_z);
-v = integrate_data(data_3d.edge.geom, int);
+integral_3d(data_3d)
 
 end
 
@@ -171,5 +148,53 @@ colorbar();
 xlabel('x [m]')
 ylabel('y [m]')
 title('Electric Field [V/m]')
+
+end
+
+function integral_2d(data)
+
+fprintf('2d\n')
+
+int = struct('type', 'scalar', 'data', data.edge.E);
+v = integrate_data(data.edge.geom, int);
+fprintf('    edge / scalar = %s\n', mat2str(v, 3))
+
+int = struct('type', 'tangential', 'data_x', data.edge.E_x, 'data_y', data.edge.E_y);
+v = integrate_data(data.edge.geom, int);
+fprintf('    edge / tangential = %s\n', mat2str(v, 3))
+
+int = struct('type', 'normal', 'data_x', data.edge.E_x, 'data_y', data.edge.E_y);
+v = integrate_data(data.edge.geom, int);
+fprintf('    edge / normal = %s\n', mat2str(v, 3))
+
+int = struct('type', 'scalar', 'data', data.surface.E);
+v = integrate_data(data.surface.geom, int);
+fprintf('    surface / scalar = %s\n', mat2str(v, 3))
+
+end
+
+function integral_3d(data)
+
+fprintf('3d\n')
+
+int = struct('type', 'scalar', 'data', data.edge.E);
+v = integrate_data(data.edge.geom, int);
+fprintf('    edge / scalar = %s\n', mat2str(v, 3))
+
+int = struct('type', 'tangential', 'data_x', data.edge.E_x, 'data_y', data.edge.E_y, 'data_z', data.edge.E_z);
+v = integrate_data(data.edge.geom, int);
+fprintf('    edge / tangential = %s\n', mat2str(v, 3))
+
+int = struct('type', 'scalar', 'data', data.surface.E);
+v = integrate_data(data.surface.geom, int);
+fprintf('    surface / scalar = %s\n', mat2str(v, 3))
+
+int = struct('type', 'normal', 'data_x', data.surface.E_x, 'data_y', data.surface.E_y, 'data_z', data.surface.E_z);
+v = integrate_data(data.surface.geom, int);
+fprintf('    surface / normal = %s\n', mat2str(v, 3))
+
+int = struct('type', 'scalar', 'data', data.volume.E);
+v = integrate_data(data.volume.geom, int);
+fprintf('    volume / scalar = %s\n', mat2str(v, 3))
 
 end
