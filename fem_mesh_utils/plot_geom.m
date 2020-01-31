@@ -31,38 +31,55 @@ patch(...
     );
 hold('on')
 
-switch geom.type
-    case 'edge_2d'
-        x = (geom.x(geom.tri(:,1))+geom.x(geom.tri(:,2)))./2;
-        y = (geom.y(geom.tri(:,1))+geom.y(geom.tri(:,2)))./2;
-        d_x = geom.d_x;
-        d_y = geom.d_y;
-        
-        quiver(x, y, d_x, d_y, plot_param.arrow_scale, 'Color', plot_param.arrow_color)
-    case 'edge_3d'
-        x = (geom.x(geom.tri(:,1))+geom.x(geom.tri(:,2)))./2;
-        y = (geom.y(geom.tri(:,1))+geom.y(geom.tri(:,2)))./2;
-        z = (geom.z(geom.tri(:,1))+geom.z(geom.tri(:,2)))./2;
-        d_x = geom.d_x;
-        d_y = geom.d_y;
-        d_z = geom.d_z;
-        
-        quiver3(x, y, z, d_x, d_y, d_z, plot_param.arrow_scale, 'Color', plot_param.arrow_color)
-    case 'surface_2d'
-        % pass
-    case 'surface_3d'
-        x = (geom.x(geom.tri(:,1))+geom.x(geom.tri(:,2))+geom.x(geom.tri(:,3)))./3;
-        y = (geom.y(geom.tri(:,1))+geom.y(geom.tri(:,2))+geom.y(geom.tri(:,3)))./3;
-        z = (geom.z(geom.tri(:,1))+geom.z(geom.tri(:,2))+geom.z(geom.tri(:,3)))./3;
-        n_x = geom.n_x;
-        n_y = geom.n_y;
-        n_z = geom.n_z;
-
-        quiver3(x, y, z, n_x, n_y, n_z, plot_param.arrow_scale, 'Color', plot_param.arrow_color)
-    case 'volume_3d'
-        % pass
-    otherwise
-        error('invalid type')
+if plot_param.plot_arrow==true
+    switch geom.type
+        case 'edge_2d'
+            x = (geom.x(geom.tri(:,1))+geom.x(geom.tri(:,2)))./2;
+            y = (geom.y(geom.tri(:,1))+geom.y(geom.tri(:,2)))./2;
+            d_x = geom.d_x;
+            d_y = geom.d_y;
+            
+            quiver(...
+                x, y,...
+                d_x, d_y,...
+                plot_param.arrow_scale,...
+                'Color', plot_param.arrow_color...
+                )
+        case 'edge_3d'
+            x = (geom.x(geom.tri(:,1))+geom.x(geom.tri(:,2)))./2;
+            y = (geom.y(geom.tri(:,1))+geom.y(geom.tri(:,2)))./2;
+            z = (geom.z(geom.tri(:,1))+geom.z(geom.tri(:,2)))./2;
+            d_x = geom.d_x;
+            d_y = geom.d_y;
+            d_z = geom.d_z;
+            
+            quiver3(...
+                x, y, z,...
+                d_x, d_y, d_z,...
+                plot_param.arrow_scale,...
+                'Color', plot_param.arrow_color...
+            )
+        case 'surface_2d'
+            % pass
+        case 'surface_3d'
+            x = (geom.x(geom.tri(:,1))+geom.x(geom.tri(:,2))+geom.x(geom.tri(:,3)))./3;
+            y = (geom.y(geom.tri(:,1))+geom.y(geom.tri(:,2))+geom.y(geom.tri(:,3)))./3;
+            z = (geom.z(geom.tri(:,1))+geom.z(geom.tri(:,2))+geom.z(geom.tri(:,3)))./3;
+            n_x = geom.n_x;
+            n_y = geom.n_y;
+            n_z = geom.n_z;
+            
+            quiver3(...
+                x, y, z,...
+                n_x, n_y, n_z,...
+                plot_param.arrow_scale,...
+                'Color', plot_param.arrow_color...
+                )
+        case 'volume_3d'
+            % pass
+        otherwise
+            error('invalid type')
+    end
 end
 
 end

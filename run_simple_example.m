@@ -9,6 +9,7 @@ data_2d = data_tmp.data_2d;
 data_3d = data_tmp.data_3d;
 
 % plot_param
+plot_param.plot_arrow = true;
 plot_param.arrow_scale = 1.0;
 plot_param.arrow_color = 'r';
 plot_param.marker = 'x';
@@ -65,9 +66,12 @@ ylabel('y [m]')
 title('Geometry')
 
 % data
+plt_scalar = struct('type', 'scalar', 'data', sum(abs(data.E), 2), 'face_alpha', 0.5);
+plt_vector = struct('type', 'vector', 'data_x', sum(abs(data.E_x), 2), 'data_y', sum(abs(data.E_y), 2), 'arrow_scale', 1.0, 'arrow_color', 'r');
+
 figure()
-hold('on')
-plot_data(data.geom, sum(data.E, 2));
+plot_data(data.geom, plt_scalar);
+plot_data(data.geom, plt_vector);
 axis('equal')
 grid('on')
 colorbar();
@@ -99,9 +103,12 @@ ylabel('y [m]')
 title('Geometry')
 
 % data
+plt_scalar = struct('type', 'scalar', 'data', sum(abs(data.E), 2), 'face_alpha', 0.5);
+plt_vector = struct('type', 'vector', 'data_x', sum(abs(data.E_x), 2), 'data_y', sum(abs(data.E_y), 2), 'data_z', sum(abs(data.E_z), 2), 'arrow_scale', 1.0, 'arrow_color', 'r');
+
 figure()
-hold('on')
-plot_data(data.geom, sum(data.E, 2));
+plot_data(data.geom, plt_scalar);
+plot_data(data.geom, plt_vector);
 axis('equal')
 grid('on')
 view([45,45])

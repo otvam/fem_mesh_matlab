@@ -9,28 +9,41 @@ data_edge = data_tmp.data_edge;
 data_surface = data_tmp.data_surface;
 
 % parse
-[geom_edge, geom_deform_edge, disp_edge] = parse_data(data_edge, 100.0);
-[geom_surface, geom_deform_surface, disp_surface] = parse_data(data_surface, 100.0);
-
-keyboard
+[geom_edge, geom_deform_edge, disp_edge] = parse_data(data_edge, 0.0, 100.0);
+[geom_surface, geom_deform_surface, disp_surface] = parse_data(data_surface, 0.0, 100.0);
 
 % plot_param
+plot_param.plot_arrow = false;
 plot_param.arrow_scale = 1.0;
 plot_param.arrow_color = 'r';
-plot_param.marker = 'x';
+plot_param.marker = 'none';
 plot_param.face_color = [0.8 0.8 1.0];
 plot_param.edge_color = 'k';
 plot_param.edge_alpha = 1.0;
 plot_param.face_alpha = 0.5;
 
 keyboard
+% geom
+figure()
+plot_geom(geom_edge, plot_param);
+axis('equal')
+grid('on')
+view([45,45])
+xlabel('x [m]')
+ylabel('y [m]')
+title('Geometry')
+
+
+% plot_param
+
+keyboard
 
 end
 
-function [geom, geom_deform, disp] = parse_data(data, scale)
+function [geom, geom_deform, disp] = parse_data(data, scale_original, scale_deform)
 
-geom = deform_geometry(data, 0.0);
-geom_deform = deform_geometry(data, scale);
+geom = deform_geometry(data, scale_original);
+geom_deform = deform_geometry(data, scale_deform);
 disp = extract_data(geom, data.disp, @mean);
 
 end
