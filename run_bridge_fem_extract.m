@@ -22,7 +22,10 @@ expr = {'u', 'v', 'w', 'solid.disp'};
 [geom_fem, value_fem] = extract_comsol(model, dataset, sel, type, expr);
 
 data.geom_fem = geom_fem;
-data.disp_mat = [value_fem{1:3}];
+data.disp_x = value_fem{1};
+data.disp_y = value_fem{2};
+data.disp_z = value_fem{3};
 data.disp = value_fem{4};
+data.disp_mat = [value_fem{1:3}];
 
 end
