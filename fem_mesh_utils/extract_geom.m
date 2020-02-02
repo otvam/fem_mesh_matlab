@@ -1,7 +1,64 @@
 function geom = extract_geom(geom_fem, remove_duplicates)
+%EXTRACT_GEOM Extract and parse a 2d/3d meshed geometry.
+%   geom = EXTRACT_GEOM(geom_fem, remove_duplicates)
+%   geom_fem - raw mesh data from a FEM solver (struct)
+%      geom_fem.type - type of the geometry (string)
+%         'edge_2d' - An edge for a 2d geometry
+%         'edge_3d' - An edge for a 3d geometry
+%         'surface_2d' - A surface for a 2d geometry
+%         'surface_2d' - A surface for a 2d geometry
+%         'volume_3d' - A volume for 3d geometry
+%      geom_fem.pts - vertices matrix (matrix of float)
+%         n_fem x 2 - for a 2d geometry, n_fem is the number of vertices
+%         n_fem x 3 - for a 3d geometry, n_fem is the number of vertices
+%      geom_fem.tri - triangulation matrix (matrix of indices)
+%         n_tri x 2 - for an edge, n_tri is the number of segments
+%         n_tri x 3 - for a surface, n_tri is the number of triangles
+%         n_tri x 4 - for a volume, n_tri is the number of tetrahedrons
+%   remove_duplicates - remove (or not) duplicated vertices (boolean)
+%   geom - parsed mesh data (struct)
+%      geom.type - type of the geometry (string)
+%         'edge_2d' - An edge for a 2d geometry
+%         'edge_3d' - An edge for a 3d geometry
+%         'surface_2d' - A surface for a 2d geometry
+%         'surface_2d' - A surface for a 2d geometry
+%         'volume_3d' - A volume for 3d geometry
+%      geom.n - number of vertices (integer)
+%      geom.idx_data - vector with information on the removed duplicated vertices (vector of indices)
+%      geom.tri - triangulation matrix (matrix of indices)
+%         n_tri x 2 - for an edge, n_tri is the number of segments
+%         n_tri x 3 - for a surface, n_tri is the number of triangles
+%         n_tri x 4 - for a volume, n_tri is the number of tetrahedrons
+%      geom.x - x coordinates of the vertices (vector of float, 2d and 3d geometries)
+%      geom.y - y coordinates of the vertices (vector of float, 2d and 3d geometries)
+%      geom.z - y coordinates of the vertices (vector of float, 3d geometries)
+%      geom.length_tri - length of the different segments (vector of float, 2d and 3d edge geometries)
+%      geom.length - total length of the edge (float, 2d and 3d edge geometries)
+%      geom.d_x - x component of the (non-normalized) vectors along the segements (vector of float, 2d and 3d edge geometries)
+%      geom.d_y - y component of the (non-normalized) vectors along the segements (vector of float, 2d and 3d edge geometries)
+%      geom.d_z - z component of the (non-normalized) vectors along the segements (vector of float, 3d edge geometries)
+%      geom.area_tri - area of the different triangles (vector of float, 2d and 3d surface geometries)
+%      geom.area - total area of the surface (float, 2d and 3d surface geometries)
+%      geom.n_x - x component of the (non-normalized) normal vectors (vector of float, 3d surface geometries)
+%      geom.n_y - y component of the (non-normalized) normal vectors (vector of float, 3d surface geometries)
+%      geom.n_z - z component of the (non-normalized) normal vectors (vector of float, 3d surface geometries)
+%      geom.volume_tri - volume of the different tetrahedrons (vector of float, 3d volume geometries)
+%      geom.volume - total volume of the object (float, 3d volume geometries)
+%
+%   This function makes the following steps:
+%      - remove duplicated vertices (if asked, time consuming on large meshes)
+%      - compute direction and normal vectors
+%      - compute length, area, and volume
+%
+%   See also PLOT_GEOM, EXTRACT_DATA.
 
+%   Thomas Guillod.
+%   2020 - BSD License.
+
+% remove duplicated vertices
 geom = remove_duplicate_pts(geom_fem, remove_duplicates);
 
+% add feature-dependent information
 switch geom.type
     case 'edge_2d'
         geom = compute_edge_2d(geom);
@@ -20,21 +77,30 @@ end
 end
 
 function geom = remove_duplicate_pts(geom_fem, remove_duplicates)
+%REMOVE_DUPLICATE_PTS Remove duplicated vertices.
+%   geom = REMOVE_DUPLICATE_PTS(geom_fem, remove_duplicates)
+%   geom_fem - raw mesh data from a FEM solver (struct)
+%   remove_duplicates - remove (or not) duplicated vertices (boolean)
+%   geom - parsed mesh data (struct)
 
+% number of vertices
+n = size(geom_fem.pts, 1);
+
+% get the duplicated points and remove them
 if remove_duplicates==true
-    [pts_unique, idx, idx_rev] = unique(geom_fem.pts, 'rows');
-    tri = changem(geom_fem.tri, idx_rev, 1:geom_fem.n);
-    tri = unique(tri,'rows');
+    [pts_unique, idx, idx_data] = unique(geom_fem.pts, 'rows');
+    tri = changem(geom_fem.tri, idx_data, 1:n);
+    tri = unique(tri, 'rows');
 else
-    idx = 1:geom_fem.n;
-    idx_rev = 1:geom_fem.n;
+    idx = 1:n;
+    idx_data = 1:n;
     tri = geom_fem.tri;
 end
 
+% assign the new geometry
 geom.type = geom_fem.type;
 geom.n = length(idx);
-geom.idx = idx;
-geom.idx_rev = idx_rev;
+geom.idx_data = idx_data;
 geom.tri = tri;
 switch geom_fem.type
     case {'edge_2d', 'surface_2d'}
@@ -50,7 +116,38 @@ end
 
 end
 
+function geom = compute_edge_2d(geom)
+%COMPUTE_EDGE_2D Add information specific for 2d edges.
+%   geom = COMPUTE_EDGE_2D(geom)
+%   geom - parsed mesh data (struct)
+
+% assign
+x = geom.x;
+y = geom.y;
+tri = geom.tri;
+
+% get the vector
+AB = [x(tri(:,2))-x(tri(:,1)) ; y(tri(:,2))-y(tri(:,1))];
+
+% get the direction vector
+d_x = AB(1,:);
+d_y = AB(2,:);
+
+% get the length
+length_tri = sqrt(d_x.^2+d_y.^2);
+
+% assign
+geom.length_tri = length_tri;
+geom.length = sum(length_tri);
+geom.d_x = d_x;
+geom.d_y = d_y;
+
+end
+
 function geom = compute_edge_3d(geom)
+%COMPUTE_EDGE_3D Add information specific for 3d edges.
+%   geom = COMPUTE_EDGE_3D(geom)
+%   geom - parsed mesh data (struct)
 
 % assign
 x = geom.x;
@@ -78,32 +175,10 @@ geom.d_z = d_z;
 
 end
 
-function geom = compute_edge_2d(geom)
-
-% assign
-x = geom.x;
-y = geom.y;
-tri = geom.tri;
-
-% get the vector
-AB = [x(tri(:,2))-x(tri(:,1)) ; y(tri(:,2))-y(tri(:,1))];
-
-% get the direction vector
-d_x = AB(1,:);
-d_y = AB(2,:);
-
-% get the length
-length_tri = sqrt(d_x.^2+d_y.^2);
-
-% assign
-geom.length_tri = length_tri;
-geom.length = sum(length_tri);
-geom.d_x = d_x;
-geom.d_y = d_y;
-
-end
-
 function geom = compute_surface_2d(geom)
+%COMPUTE_SURFACE_2D Add information specific for 2d surfaces.
+%   geom = COMPUTE_SURFACE_2D(geom)
+%   geom - parsed mesh data (struct)
 
 % assign
 x = geom.x;
@@ -127,6 +202,9 @@ geom.area = sum(area_tri);
 end
 
 function geom = compute_surface_3d(geom)
+%COMPUTE_SURFACE_3D Add information specific for 3d surfaces.
+%   geom = COMPUTE_SURFACE_3D(geom)
+%   geom - parsed mesh data (struct)
 
 % assign
 x = geom.x;
@@ -159,6 +237,9 @@ geom.n_z = n_z;
 end
 
 function geom = compute_volume_3d(geom)
+%COMPUTE_VOLUME_3D Add information specific for 3d volumes.
+%   geom = COMPUTE_VOLUME_3D(geom)
+%   geom - parsed mesh data (struct)
 
 % assign
 x = geom.x;

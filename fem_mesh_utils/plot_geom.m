@@ -1,5 +1,28 @@
 function plot_geom(geom, plot_param)
+%PLOT_GEOM Plot a 2d/3d meshed geometry.
+%   PLOT_GEOM(geom, plot_param)
+%   geom - parsed mesh data (struct)
+%   plot_param - plot parameters (struct)
+%      plot_param.plot_arrow -  plot (or not) the direction and normal vectors (boolean)
+%      plot_param.arrow_scale - scaling factor for the arrows (float)
+%      plot_param.arrow_color - color of the arrows (color)
+%      plot_param.arrow_width - line tickness for the arrows (float)
+%      plot_param.vertice_marker - marker for the vertices (marker)
+%      plot_param.face_color - color of the faces (color)
+%      plot_param.edge_color - color of the edges (color)
+%      plot_param.face_alpha - transparency channel for the faces (float)
+%      plot_param.edge_width - line tickness for the edges (float)
+%
+%   This function plot the following features:
+%      - edge, surface, and volumes
+%      - direction and normal vectors
+%
+%   See also EXTRACT_GEOM, PATCH, QUIVER, QUIVER3.
 
+%   Thomas Guillod.
+%   2020 - BSD License.
+
+% extract the vertices and the triangulation
 switch geom.type
     case 'edge_2d'
         pts = [geom.x ; geom.y].';
@@ -20,17 +43,19 @@ switch geom.type
         error('invalid type')
 end
 
+% plot the vertices and the triangulation
 patch(...
     'Vertices', pts,...
     'Faces', tri,...
-    'Marker', plot_param.marker,...
+    'Marker', plot_param.vertice_marker,...
     'FaceColor', plot_param.face_color,...
     'EdgeColor', plot_param.edge_color,...
     'FaceAlpha', plot_param.face_alpha,...
-    'LineWidth', plot_param.line_width...
+    'LineWidth', plot_param.edge_width...
     );
 hold('on')
 
+% plot the normal or tangential vectors
 if plot_param.plot_arrow==true
     switch geom.type
         case 'edge_2d'
@@ -44,7 +69,7 @@ if plot_param.plot_arrow==true
                 d_x, d_y,...
                 plot_param.arrow_scale,...
                 'Color', plot_param.arrow_color,...
-                'LineWidth', plot_param.line_width...
+                'LineWidth', plot_param.arrow_width...
                 )
         case 'edge_3d'
             x = (geom.x(geom.tri(:,1))+geom.x(geom.tri(:,2)))./2;
@@ -59,10 +84,10 @@ if plot_param.plot_arrow==true
                 d_x, d_y, d_z,...
                 plot_param.arrow_scale,...
                 'Color', plot_param.arrow_color,...
-                'LineWidth', plot_param.line_width...
+                'LineWidth', plot_param.arrow_width...
                 )
         case 'surface_2d'
-            % pass
+            % pass, not applicable
         case 'surface_3d'
             x = (geom.x(geom.tri(:,1))+geom.x(geom.tri(:,2))+geom.x(geom.tri(:,3)))./3;
             y = (geom.y(geom.tri(:,1))+geom.y(geom.tri(:,2))+geom.y(geom.tri(:,3)))./3;
@@ -76,10 +101,10 @@ if plot_param.plot_arrow==true
                 n_x, n_y, n_z,...
                 plot_param.arrow_scale,...
                 'Color', plot_param.arrow_color,...
-                'LineWidth', plot_param.line_width...
+                'LineWidth', plot_param.arrow_width...
                 )
         case 'volume_3d'
-            % pass
+            % pass, not applicable
         otherwise
             error('invalid type')
     end
