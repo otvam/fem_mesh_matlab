@@ -148,6 +148,7 @@ grid('on')
 view([45,45])
 xlabel('x [m]')
 ylabel('y [m]')
+zlabel('z [m]')
 title('Geometry')
 
 % plot the data (scalar and vector)
@@ -175,6 +176,7 @@ view([45,45])
 colorbar();
 xlabel('x [m]')
 ylabel('y [m]')
+zlabel('z [m]')
 title('Electric Field [V/m]')
 
 end
@@ -234,6 +236,7 @@ view([45,45])
 colorbar();
 xlabel('x [m]')
 ylabel('y [m]')
+zlabel('z [m]')
 title('Electric Field [V/m]')
 
 end
