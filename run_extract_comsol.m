@@ -5,7 +5,7 @@ function run_extract_comsol()
 %      - 'simple' - a simple 2d and 3d electrostatic model meant as a basic example
 %      - 'bridge' - a complex 3d structural analysis model meant as a show-off
 %
-%   This MATLAB toolbox is indepedent of COMSOL and can work with any triangulated data.
+%   The file is the only file that requires on COMSOL.
 %   COMSOL is just used for generating the data for the examples.
 %
 %   See also RUN_BRIDGE_EXAMPLE, RUN_SIMPLE_EXAMPLE, MPHLOAD, MPHEVAL.
