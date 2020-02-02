@@ -2,7 +2,7 @@ function run_bridge_example()
 %RUN_BRIDGE_EXAMPLE Extract and plot the results of 3d structural analysis simulation.
 %
 %   This example is meant as a show-off with a complex 3d mesh and a beautiful plot.
-%   The example 'run_simple_example' is meant to test/demonstrates the different function systemically.
+%   The example 'run_simple_example' is meant to systemically test/demonstrates the different functions.
 %
 %   See also RUN_EXTRACT_COMSOL, RUN_SIMPLE_EXAMPLE, EXTRACT_GEOM, EXTRACT_DATA, PLOT_GEOM, PLOT_DATA.
 

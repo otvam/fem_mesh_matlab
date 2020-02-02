@@ -47,69 +47,69 @@ save('model_bridge/bridge.mat', 'data_edge', 'data_surface')
 
 end
 
-function data = extract_simple_2d(model, dataset, sel, type)
+function data_fem = extract_simple_2d(model, dataset, sel, type)
 %EXTRACT_SIMPLE_2D Extract the data for the 2d electrostatic model.
-%   data = EXTRACT_SIMPLE_2D(model, dataset, sel, type)
+%   data_fem = EXTRACT_SIMPLE_2D(model, dataset, sel, type)
 %   model - COMSOL model livelink object (COMSOL model)
 %   dataset - name of the dataset (string)
 %   sel - name of the selection containing the geometry (string)
 %   type - type of the geometry (string)
-%   data - extracted geometry and data (struct)
+%   data_fem - extracted geometry and data (struct)
 
 % extract data from COMSOL
 expr = {'es_2d.Ex', 'es_2d.Ey', 'es_2d.normE'};
 [geom_fem, value_fem] = extract_comsol(model, dataset, sel, type, expr);
 
 % assign data
-data.geom_fem = geom_fem;
-data.E_x = value_fem{1};
-data.E_y = value_fem{2};
-data.E = value_fem{3};
+data_fem.geom_fem = geom_fem;
+data_fem.E_x = value_fem{1};
+data_fem.E_y = value_fem{2};
+data_fem.E = value_fem{3};
 
 end
 
-function data = extract_simple_3d(model, dataset, sel, type)
+function data_fem = extract_simple_3d(model, dataset, sel, type)
 %EXTRACT_SIMPLE_3D Extract the data for the 3d electrostatic model.
-%   data = EXTRACT_SIMPLE_3D(model, dataset, sel, type)
+%   data_fem = EXTRACT_SIMPLE_3D(model, dataset, sel, type)
 %   model - COMSOL model livelink object (COMSOL model)
 %   dataset - name of the dataset (string)
 %   sel - name of the selection containing the geometry (string)
 %   type - type of the geometry (string)
-%   data - extracted geometry and data (struct)
+%   data_fem - extracted geometry and data (struct)
 
 % extract data from COMSOL
 expr = {'es_3d.Ex', 'es_3d.Ey', 'es_3d.Ez', 'es_3d.normE'};
 [geom_fem, value_fem] = extract_comsol(model, dataset, sel, type, expr);
 
 % assign data
-data.geom_fem = geom_fem;
-data.E_x = value_fem{1};
-data.E_y = value_fem{2};
-data.E_z = value_fem{3};
-data.E = value_fem{4};
+data_fem.geom_fem = geom_fem;
+data_fem.E_x = value_fem{1};
+data_fem.E_y = value_fem{2};
+data_fem.E_z = value_fem{3};
+data_fem.E = value_fem{4};
 
 end
 
-function data = extract_bridge(model, dataset, sel, type)
+function data_fem = extract_bridge(model, dataset, sel, type)
 %EXTRACT_BRIDGE Extract the data for the 3d structural analysis model.
-%   data = EXTRACT_BRIDGE(model, dataset, sel, type)
+%   data_fem = EXTRACT_BRIDGE(model, dataset, sel, type)
 %   model - COMSOL model livelink object (COMSOL model)
 %   dataset - name of the dataset (string)
 %   sel - name of the selection containing the geometry (string)
 %   type - type of the geometry (string)
-%   data - extracted geometry and data (struct)
+%   data_fem - extracted geometry and data (struct)
 
 % extract data from COMSOL
 expr = {'u', 'v', 'w', 'solid.disp'};
 [geom_fem, value_fem] = extract_comsol(model, dataset, sel, type, expr);
 
 % assign data
-data.geom_fem = geom_fem;
-data.disp_x = value_fem{1};
-data.disp_y = value_fem{2};
-data.disp_z = value_fem{3};
-data.disp = value_fem{4};
-data.disp_mat = [value_fem{1:3}];
+data_fem.geom_fem = geom_fem;
+data_fem.disp_x = value_fem{1};
+data_fem.disp_y = value_fem{2};
+data_fem.disp_z = value_fem{3};
+data_fem.disp = value_fem{4};
+data_fem.disp_mat = [value_fem{1:3}];
 
 end
 
