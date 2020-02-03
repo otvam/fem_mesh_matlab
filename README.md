@@ -1,6 +1,6 @@
 # MATLAB toolbox for handling 2d and 3d FEM meshes
 
-This **MATLAB** toolbox offers numerous functionionalities for handling **2d and 3d meshes**:
+This **MATLAB** toolbox offers numerous functionalities for handling **2d and 3d meshes**:
 * **Parse geometry** (edge, surface, and volume) - 'extract_geom.m'
 * **Plot geometry** (edge, surface, volume, normal vector, and tangential vector) - 'plot_geom.m'
 * **Assign variables** to the vertices of the meshes - 'extract_data.m'
@@ -43,16 +43,16 @@ The following limitations apply to the toolbox:
 * For 2d meshes and 3d surfaces, only triangular meshes are supported (no quadrilateral meshes)
 * For 3d volumes, only tetrahedral meshes are supported (no hexahedral meshes)
 * The integration and interpolation methods are considering linear schemes (no higher-order)
-* Probably not scalable to very large meshes (tested with 2 millions vertices and 4 millions triangles)
+* Probably not scalable to very large meshes (tested with 2 million vertices and 4 million triangles)
 
 ## Compatibility
 
-The toolbox requires the following softwares:
+The toolbox requires the following software packages:
 * Tested with MATLAB R2018b
 * No toolboxes are required
 * Compatibility with GNU Octave not tested but probably problematic
 
-The following softwares are used for generating the data of the examples:
+The following software packages are used for generating the data of the examples:
 * COMSOL 5.4 for generating the meshes and the solutions
 * Inventor 2019 for the CAD drawings
 
