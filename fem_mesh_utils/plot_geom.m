@@ -3,7 +3,7 @@ function plot_geom(geom, plot_param)
 %   PLOT_GEOM(geom, plot_param)
 %   geom - parsed mesh data (struct)
 %   plot_param - plot parameters (struct)
-%      plot_param.plot_arrow -  plot (or not) the direction and normal vectors (boolean)
+%      plot_param.plot_arrow -  plot (or not) the tangent and normal vectors (boolean)
 %      plot_param.arrow_scale - scaling factor for the arrows (float)
 %      plot_param.arrow_color - color of the arrows (color)
 %      plot_param.arrow_width - line tickness for the arrows (float)
@@ -15,7 +15,7 @@ function plot_geom(geom, plot_param)
 %
 %   This function plot the following features:
 %      - edge, surface, and volumes
-%      - direction and normal vectors
+%      - tangent and normal vectors
 %
 %   See also EXTRACT_GEOM, PATCH, QUIVER, QUIVER3.
 

@@ -47,7 +47,7 @@ function geom = extract_geom(geom_fem, remove_duplicates)
 %
 %   This function makes the following steps:
 %      - remove duplicated vertices (if asked, time consuming on large meshes)
-%      - compute direction and normal vectors
+%      - compute tangent and normal vectors
 %      - compute length, area, and volume
 %
 %   See also PLOT_GEOM, EXTRACT_DATA.
@@ -129,7 +129,7 @@ tri = geom.tri;
 % get the vector
 AB = [x(tri(:,2))-x(tri(:,1)) ; y(tri(:,2))-y(tri(:,1))];
 
-% get the direction vector
+% get the tangent vector
 d_x = AB(1,:);
 d_y = AB(2,:);
 
@@ -158,7 +158,7 @@ tri = geom.tri;
 % get the vector
 AB = [x(tri(:,2))-x(tri(:,1)) ; y(tri(:,2))-y(tri(:,1)) ; z(tri(:,2))-z(tri(:,1))];
 
-% get the direction vector
+% get the tangent vector
 d_x = AB(1,:);
 d_y = AB(2,:);
 d_z = AB(3,:);
