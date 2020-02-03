@@ -89,7 +89,7 @@ n = size(geom_fem.pts, 1);
 % get the duplicated points and remove them
 if remove_duplicates==true
     [pts_unique, idx, idx_data] = unique(geom_fem.pts, 'rows');
-    tri = changem(geom_fem.tri, idx_data, 1:n);
+    tri = substitute_mat(geom_fem.tri, idx_data, 1:n);
     tri = unique(tri, 'rows');
 else
     idx = 1:n;
@@ -262,5 +262,21 @@ volume_tri = abs(det_p-det_m)./6;
 % assign
 geom.volume_tri = volume_tri;
 geom.volume = sum(volume_tri);
+
+end
+
+function mat_new = substitute_mat(mat_old, v_new, v_old)
+%SUBSTITUTE_MAT Substitute values in a matrix.
+%   mat_new = SUBSTITUTE_MAT(mat_old, v_new, v_old)
+%   mat_old - input matrix (matrix)
+%   v_new - value to be substituted (array)
+%   v_old - value to be replaced (array)
+%   mat_new - output matrix (matrix)
+
+assert(numel(v_new)==numel(v_old), 'invalid substitution')
+mat_new = mat_old;
+for i=1:numel(v_new)
+    mat_new(mat_old==v_old(i)) = v_new(i);
+end
 
 end
