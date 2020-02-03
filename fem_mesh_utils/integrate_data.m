@@ -15,6 +15,8 @@ function data_int = integrate_data(geom, int)
 %
 %   This function accepts variable with multiple dimensions (see 'extract_data').
 %   The integration is done with linear elements, with can be sub-optimal for high-order FEM.
+%   The vector integrals are depending of the surface/edge orientations.
+%   The orientation of the geometry can be plotted with 'plot_geom'.
 %
 %   See also EXTRACT_GEOM, EXTRACT_DATA.
 

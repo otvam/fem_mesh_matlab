@@ -47,7 +47,7 @@ function geom = extract_geom(geom_fem, remove_duplicates)
 %
 %   This function makes the following steps:
 %      - remove duplicated vertices (if asked, time consuming on large meshes)
-%      - compute tangent and normal vectors
+%      - compute tangent and normal vectors (direction taken from the triangulation matrix)
 %      - compute length, area, and volume
 %
 %   See also PLOT_GEOM, EXTRACT_DATA.
