@@ -1,3 +1,4 @@
 *.lock
 *.asv
 model_bridge/OldVersions
+*.lck
