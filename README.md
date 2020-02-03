@@ -43,7 +43,7 @@ The following limitations apply to the toolbox:
 * For 2d meshes and 3d surfaces, only triangular meshes are supported (no quadrilateral meshes)
 * For 3d volumes, only tetrahedral meshes are supported (no hexahedral meshes)
 * The integration and interpolation methods are considering linear schemes (no higher-order)
-* Probably not scalable to meshes with millions of vertices (tested up to 100'000 vertices)
+* Probably not scalable to very large meshes (tested with 2 millions vertices and 4 millions triangles)
 
 ## Compatibility
 
