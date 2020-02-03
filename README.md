@@ -9,7 +9,7 @@ This **MATLAB** toolbox offers numerous functionionalities for handling **2d and
 * **Interpolate variables** on the meshes - 'interp_data.m'
 
 The toolbox can be used for the following tasks:
-* Handling **finite element method (FEM)** results (e.g. COMSOL, ANSYS, OpenFOAM)
+* Processing **finite element method (FEM)** results (e.g. COMSOL, ANSYS, OpenFOAM)
 * Handling **geographic information system (GIS)** data (e.g. digital elevation model)
 * Handling **additive manufacturing** data (e.g. 3d printing)
 
@@ -18,7 +18,7 @@ The toolbox can be used for the following tasks:
 The example [run_bridge_example.m](run_bridge_example.m) handles a complex 3d structural analysis:
 
 <p float="middle">
-    <img src="readme_img/bridge.png.png" width="600">
+    <img src="readme_img/bridge.png" width="600">
 </p>
 
 The example [run_simple_example.m](run_simple_example.m) uses a simple 2d and 3d electrostatic simulation.
@@ -52,7 +52,7 @@ The toolbox requires the following softwares:
 * No toolboxes are required
 * Compatibility with GNU Octave not tested but probably problematic
 
-The following softwares are used for generating the data for the examples:
+The following softwares are used for generating the data of the examples:
 * COMSOL 5.4 for generating the meshes and the solutions
 * Inventor 2019 for the CAD drawings
 
