@@ -43,14 +43,14 @@ The following limitations apply to the toolbox:
 * For 2d meshes and 3d surfaces, only triangular meshes are supported (no quadrilateral meshes)
 * For 3d volumes, only tetrahedral meshes are supported (no hexahedral meshes)
 * The integration and interpolation methods are considering linear schemes (no higher-order)
-* Probably not scalable to very large meshes (tested with 2 million vertices and 4 million triangles)
+* Probably not scalable to very large meshes (tested with 3.5 million vertices and 7 million triangles)
 
 ## Compatibility
 
 The toolbox requires the following software packages:
 * Tested with MATLAB R2018b
 * No toolboxes are required
-* Compatibility with GNU Octave not tested but probably problematic
+* Compatibility with GNU Octave not tested but probably slightly problematic
 
 The following software packages are used for generating the data of the examples:
 * COMSOL 5.4 for generating the meshes and the solutions
