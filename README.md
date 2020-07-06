@@ -1,4 +1,4 @@
-# MATLAB toolbox for handling 2d and 3d FEM meshes
+# MATLAB Toolbox for Handling 2D and 3D FEM Meshes
 
 This **MATLAB** toolbox offers numerous functionalities for handling **2d and 3d meshes**:
 * **Parse geometry** (edge, surface, and volume) - 'extract_geom.m'
