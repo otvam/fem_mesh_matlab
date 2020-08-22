@@ -20,7 +20,7 @@ function plot_geom(geom, plot_param)
 %   See also EXTRACT_GEOM, PATCH, QUIVER, QUIVER3.
 
 %   Thomas Guillod.
-%   2020 - BSD License.
+%   2015-2020 - BSD License.
 
 % extract the vertices and the triangulation
 switch geom.type

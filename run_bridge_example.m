@@ -7,7 +7,7 @@ function run_bridge_example()
 %   See also RUN_EXTRACT_COMSOL, RUN_SIMPLE_EXAMPLE, EXTRACT_GEOM, EXTRACT_DATA, PLOT_GEOM, PLOT_DATA.
 
 %   Thomas Guillod.
-%   2020 - BSD License.
+%   2015-2020 - BSD License.
 
 close('all')
 addpath('fem_mesh_utils')

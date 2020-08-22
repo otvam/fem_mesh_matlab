@@ -53,7 +53,7 @@ function geom = extract_geom(geom_fem, remove_duplicates)
 %   See also PLOT_GEOM, EXTRACT_DATA.
 
 %   Thomas Guillod.
-%   2020 - BSD License.
+%   2015-2020 - BSD License.
 
 % remove duplicated vertices
 geom = remove_duplicate_pts(geom_fem, remove_duplicates);

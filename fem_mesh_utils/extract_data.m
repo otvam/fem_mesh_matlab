@@ -17,7 +17,7 @@ function data = extract_data(geom, data_fem, fct)
 %   See also EXTRACT_GEOM, PLOT_DATA.
 
 %   Thomas Guillod.
-%   2020 - BSD License.
+%   2015-2020 - BSD License.
 
 % check size of the data
 assert(size(data_fem,1)==length(geom.idx_data), 'invalid length')

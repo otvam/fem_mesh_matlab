@@ -21,7 +21,7 @@ function data_int = integrate_data(geom, int)
 %   See also EXTRACT_GEOM, EXTRACT_DATA.
 
 %   Thomas Guillod.
-%   2020 - BSD License.
+%   2015-2020 - BSD License.
 
 if strcmp(geom.type, 'edge_2d')&&strcmp(int.type, 'scalar')
     data = get_component_edge(geom, int.data);

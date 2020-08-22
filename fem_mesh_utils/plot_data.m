@@ -25,7 +25,7 @@ function plot_data(geom, plt)
 %   See also EXTRACT_GEOM, EXTRACT_DATA, PATCH, QUIVER, QUIVER3.
 
 %   Thomas Guillod.
-%   2020 - BSD License.
+%   2015-2020 - BSD License.
 
 switch plt.type
     case 'scalar'

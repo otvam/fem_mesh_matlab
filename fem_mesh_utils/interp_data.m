@@ -15,7 +15,7 @@ function data_interp = interp_data(geom, data, pts)
 %   See also EXTRACT_GEOM, EXTRACT_DATA, TRIANGULATION.
 
 %   Thomas Guillod.
-%   2020 - BSD License.
+%   2015-2020 - BSD License.
 
 % check size of the data
 assert(size(data,1)==geom.n, 'invalid data length')

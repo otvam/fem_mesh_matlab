@@ -11,7 +11,7 @@ function run_extract_comsol()
 %   See also RUN_BRIDGE_EXAMPLE, RUN_SIMPLE_EXAMPLE, MPHLOAD, MPHEVAL.
 
 %   Thomas Guillod.
-%   2020 - BSD License.
+%   2015-2020 - BSD License.
 
 close('all')
 addpath('fem_mesh_utils')
