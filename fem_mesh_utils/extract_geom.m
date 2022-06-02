@@ -6,7 +6,7 @@ function geom = extract_geom(geom_fem, remove_duplicates)
 %         'edge_2d' - An edge for a 2d geometry
 %         'edge_3d' - An edge for a 3d geometry
 %         'surface_2d' - A surface for a 2d geometry
-%         'surface_2d' - A surface for a 2d geometry
+%         'surface_3d' - A surface for a 3d geometry
 %         'volume_3d' - A volume for 3d geometry
 %      geom_fem.pts - vertices matrix (matrix of float)
 %         n_fem x 2 - for a 2d geometry, n_fem is the number of vertices
@@ -21,7 +21,7 @@ function geom = extract_geom(geom_fem, remove_duplicates)
 %         'edge_2d' - An edge for a 2d geometry
 %         'edge_3d' - An edge for a 3d geometry
 %         'surface_2d' - A surface for a 2d geometry
-%         'surface_2d' - A surface for a 2d geometry
+%         'surface_3d' - A surface for a 3d geometry
 %         'volume_3d' - A volume for 3d geometry
 %      geom.n - number of vertices (integer)
 %      geom.idx_data - vector with information on the removed duplicated vertices (vector of indices)
